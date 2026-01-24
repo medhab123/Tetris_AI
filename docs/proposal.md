@@ -5,7 +5,7 @@ title: Proposal
 
 ## Project Summary
 
-Our project aims to create an agent that can identify brain metastasis formation as early as possible, so that it is easier to prevent fatal brain tumors in patients. Research done at Stanford has shown that the presence of brain metastases in patients is linked to We will initially be working with the U-net CNN architecture, which is commonly used in medical imaging to identify tumors and other harmful developments in other parts of the body, as well as image classification in general via segmentation.
+Our project aims to create an agent that can identify brain metastasis formation as early as possible, so that it is easier to prevent fatal brain tumors in patients. Research done at Stanford has shown that the presence of brain metastases in patients is often an indicator of future brain tumor growth. Since brain metastases are much easier to treat and remove, searching for these metastases allows us to prevent them from developing further into late stage brain cancer. We will initially be working with the U-net CNN architecture, which is commonly used in medical imaging to identify tumors and other harmful developments in other parts of the body, as well as image classification in general via segmentation.
 
 This project utilizes the Stanford Brain Metastases MRI dataset, which comprises 156 whole-brain MRI studies with multimodal imaging and tumor segmentation masks for a subset of cases. The input to the system is a multi-modal MRI scan, and the output is a tumor detection decision as well as a corresponding segmentation mask. As the baseline model, we will train a standard convolutional neural network for tumor segmentation utilizing the U-Net CNN architecture. In addition to this model, we will introduce a reinforcement learning agent that learns to sequentially explore MRI slices or regions and determine when and where to apply the segmentation model.
 
@@ -24,9 +24,9 @@ Instead of learning to segment tumors from scratch, the reinforcement learning a
 
 ## AI/ML Algorithms Used
 
-U-net CNN (TensorFlow)
+U-net convolutional neural network (CNN) (TensorFlow)
 
-Reinforcement learning model from PyTorch:
+Reinforcement learning model from PyTorch
 
 ## Evaluation Plan
 
