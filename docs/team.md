@@ -13,4 +13,4 @@ title:  Team
 ***Catherine Fajardo***: catherhf
 
 ## USER 3
-***Abigail Liao***: abigalel
+***Abigale Liao***: abigalel
