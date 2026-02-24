@@ -18,6 +18,7 @@ Key goals:
 ---
 
 ## Demo / Screenshots
+![Training screenshot](images/screenshots.png)
 
 
 ---
