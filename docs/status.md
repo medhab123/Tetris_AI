@@ -21,6 +21,21 @@ In practice, we treat the original Tetris agent as a reference model and then ru
 
 ## Resources Used
 
+Code resources:
+- [ALE environment](https://ale.farama.org/environments/tetris/) to simulate Tetris
+- Gymnasium documentation for [starters on agent training](https://gymnasium.farama.org/introduction/train_agent/)
+- Stable Baselines 3
+
+Determining “expert play”/”playing like a human”:
+- [Tetris scoring](https://tetris.wiki/Scoring)
+- [Competitive Classic Tetris Rankings](https://docs.google.com/spreadsheets/d/1NUwqOotckIdSRH2FdfhBRHPU84N6EaRBM9BDkx5nDkU/edit?gid=1685146231#gid=1685146231)
+- [Common Tetris strategies](https://www.tetriseffect.game/2021/05/28/tetris-effect-community-guide/) (while they are for a slightly different version of Tetris, the core mechanics are essentially the same)
+- 
+Citations:
+[ALE](https://github.com/Farama-Foundation/Arcade-Learning-Environment):
+M. G. Bellemare, Y. Naddaf, J. Veness and M. Bowling. The Arcade Learning Environment: An Evaluation Platform for General Agents, Journal of Artificial Intelligence Research, Volume 47, pages 253-279, 2013.
+M. C. Machado, M. G. Bellemare, E. Talvitie, J. Veness, M. J. Hausknecht, M. Bowling. Revisiting the Arcade Learning Environment: Evaluation Protocols and Open Problems for General Agents, Journal of Artificial Intelligence Research, Volume 61, pages 523-562, 2018
+
 ---
 
 
