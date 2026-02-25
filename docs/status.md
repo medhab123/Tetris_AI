@@ -15,12 +15,18 @@ In practice, we treat the original Tetris agent as a reference model and then ru
 
 ### Evaluation
 ---
+When evaluating the agent, our initial requirements are for it to be on par with an average human player; that is, being able to achieve a reasonably good score and last for a few minutes without dying. The typical beginner player is able to score anywhere from 30,000 to 50,000 points, while a decent or somewhat regular player will score in the range of 100,000 - 300,000 points. With regards to the environment, this would be about 30-40 points for a “beginner” and 100-300 points for a “decent” player.
+
+	The next set of goalposts for the agent is achieving high level gameplay, though not necessarily equivalent to expert play. This involves achieving a score of at least 500,000 - 700,000 points, or about 500-700 points for the agent.
+  
+	Finally, in an ideal world the agent will be able to reach the levels of experts. A pro player would be able to score close to the maximum possible score at 999,999 points, which translates to 9,999 for the ALE environment. While the current competitive play records linked underneath do include scores and playtimes beyond this, we are only testing for individual play at this time.
+
 
 ## Remaining Goals and Challenges
 ---
 
 ## Resources Used
-
+---
 Code resources:
 - [ALE environment](https://ale.farama.org/environments/tetris/) to simulate Tetris
 - Gymnasium documentation for [starters on agent training](https://gymnasium.farama.org/introduction/train_agent/)
