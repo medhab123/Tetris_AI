@@ -19,7 +19,9 @@ This project trains and evaluates a reinforcement learning agent in the Gymnasiu
 
 ## Demo / Screenshots
 
-![Training screenshot](screenshots.png)
+<div class="screenshot-frame">
+  <img src="img/screenshots.png" alt="Training screenshot from TensorBoard showing Tetris agent performance">
+</div>
 
 We visualize training progress and gameplay in TensorBoard using reward and episode‑length curves, along with recorded policy rollouts that show how the agent’s play style changes over time.
 
