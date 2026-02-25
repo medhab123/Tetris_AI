@@ -5,12 +5,10 @@ title:  Team
 
 # {{ page.title }}
 
+Meet the TetrisRL team, three CS 175 students working on teaching an AI agent to clear as many Tetris lines as possible.
 
-## USER 1
-***Medha Bhattacharya***: mbhatta1
+## Player 1 – Medha Bhattacharya (`mbhatta1`)
 
-## USER 2
-***Catherine Fajardo***: catherhf
+## Player 2 – Catherine Fajardo (`catherhf`)
 
-## USER 3
-***Abigale Liao***: abigalel
+## Player 3 – Abigale Liao (`abigalel`)

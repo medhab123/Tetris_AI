@@ -1,32 +1,107 @@
 /* Sticky footer styles
 -------------------------------------------------- */
+/* TetrisRL custom theme */
+
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
-  /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background: radial-gradient(circle at top, #1a1a2e 0, #05030a 55%, #000000 100%);
+  color: #f4f4f4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
+
+a {
+  color: #4fd1ff;
+}
+
+a:hover,
+a:focus {
+  color: #8be9ff;
+  text-decoration: none;
+}
+
+/* Main content card */
+body > .container {
+  padding: 60px 15px 40px;
+}
+
+.page-content,
+.post,
+.home,
+.wrapper {
+  background: rgba(5, 5, 20, 0.9);
+  border-radius: 12px;
+  padding: 24px 24px 32px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.12);
+  border: 1px solid rgba(79, 209, 255, 0.25);
+}
+
+/* Tetris-style headings */
+h1,
+h2,
+h3 {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+h1 {
+  color: #ff4d6a;
+  font-weight: 800;
+}
+
+h2 {
+  color: #ffd36b;
+  border-bottom: 2px solid rgba(255, 211, 107, 0.4);
+  padding-bottom: 4px;
+  margin-top: 28px;
+}
+
+h3 {
+  color: #7df9aa;
+  margin-top: 20px;
+}
+
+/* Bullet lists */
+ul {
+  list-style-type: square;
+}
+
+li::marker {
+  color: #4fd1ff;
+}
+
+/* Code and inline code */
+code,
+pre {
+  font-family: "JetBrains Mono", "Fira Code", Menlo, monospace;
+}
+
+code {
+  font-size: 85%;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+pre {
+  background: #050711;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(79, 209, 255, 0.3);
+}
+
+/* Footer bar */
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
-}
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
-body > .container {
-  padding: 60px 15px 0;
-}
-.container .text-muted {
-  margin: 20px 0;
+  background: linear-gradient(90deg, #ff4d6a 0%, #ffd36b 50%, #4fd1ff 100%);
 }
 
 .footer > .container {
@@ -34,6 +109,7 @@ body > .container {
   padding-left: 15px;
 }
 
-code {
-  font-size: 80%;
+.footer .text-muted {
+  color: #05030a;
+  font-weight: 600;
 }
