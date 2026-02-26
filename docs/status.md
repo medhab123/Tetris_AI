@@ -2,6 +2,8 @@
 layout: default
 title: Status
 ---
+## Project Video
+[TetrisRL Video Report](https://drive.google.com/file/d/1EiF8e2n4UewKr7DtBnvBmOq2Vj421ZiD/view?usp=sharing)
 
 ## Project Summary
 ---
