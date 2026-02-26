@@ -11,9 +11,13 @@ Our project trains two different reinforcement learning agents to play the class
 
 ## Approach
 ---
-We started from a baseline PPO implementation that had already been set up to play Atari Tetris in the Gymnasium/ALE framework. Our first step was to clean up the training pipeline so that we could reliably launch runs on the HPC cluster, log results to TensorBoard, and inspect both learning curves and gameplay rollouts. Once we had a stable baseline model that consistently cleared at least a few lines, we began exploring optimization strategies to improve performance, such as adjusting environment wrappers, normalization settings, and the total number of training steps.
+As stated above, we are training two different models and comparing their performance to efficiently refine them. 
+
+Our first model is a CNN with a PPO algorithm, and uses the ALE Classic Tetris environment. The first step was to clean up the training pipeline so that we could reliably launch runs on the HPC cluster, log results to TensorBoard, and inspect both learning curves and gameplay rollouts. Once we had a stable baseline model that consistently cleared at least a few lines, we began exploring optimization strategies to improve performance, such as adjusting environment wrappers, normalization settings, and the total number of training steps.
 
 In practice, we treat the original Tetris agent as a reference model and then run controlled experiments where we change one aspect of the setup at a time (for example, how the environment is configured or how long we train) and compare the resulting learning curves and scores. 
+
+Our second model is a DQN with ReLu activation functions and a reward-based epsilon decay (RBED) policy. RBED adjusts the value of epsilon, or the agent’s learning rate, only when the agent reaches specific reward thresholds, as opposed to fixed intervals. This reduces the fluctuations in performance and enhances the agent’s ability to retain good progress in learning. 
 
 ## Evaluation
 ---
