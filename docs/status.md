@@ -22,7 +22,7 @@ The next set of goalposts for the agent is achieving high level gameplay, though
   
 Finally, in an ideal world the agent will be able to reach the levels of experts. A pro player would be able to score close to the maximum possible score at 999,999 points, which translates to 9,999 for the ALE environment. While the current competitive play records linked underneath do include scores and playtimes beyond this, we are only testing for individual play at this time.
 
-###Qualitative
+### Qualitative
 Qualitative requirements are defined in stages. At a basic level, the agent should avoid early failure and demonstrate stable survival. At a more advanced level, it should maintain consistent board height without sudden spikes. At a higher level, the agent should minimize hole creation and preserve a clean board structure.
 
 ## Remaining Goals and Challenges
