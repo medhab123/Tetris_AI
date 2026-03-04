@@ -4,12 +4,10 @@ title: Proposal
 ---
 
 ## Project Summary
+TetrisRL aims to create an agent that can play the classic version of Tetris at a professional level and is able to adopt human-like strategies while doing so. While an agent can be trained to play a variety of games adequately, most of this gameplay is applying previously learned solutions to the environment, rather than adapting to each situation like a human. 
 
-Our project aims to create an agent that can identify brain metastasis formation as early as possible, so that it is easier to prevent fatal brain tumors in patients. Research done at Stanford has shown that the presence of brain metastases in patients is often an indicator of future brain tumor growth. Since brain metastases are much easier to treat and remove, searching for these metastases allows us to prevent them from developing further into late stage brain cancer. We will initially be working with the U-net CNN architecture, which is commonly used in medical imaging to identify tumors and other harmful developments in other parts of the body, as well as image classification in general via segmentation.
+We will use both the ALE Tetris environment and the PyGames environment to train two agents, which will read in the state of the game as images and make a move in response. This will allow us to compare multiple training strategies simultaneously and fine-tune hyperparameters much faster.
 
-This project utilizes the Stanford Brain Metastases MRI dataset, which comprises 156 whole-brain MRI studies with multimodal imaging and tumor segmentation masks for a subset of cases. The input to the system is a multi-modal MRI scan, and the output is a tumor detection decision as well as a corresponding segmentation mask. As the baseline model, we will train a standard convolutional neural network for tumor segmentation utilizing the U-Net CNN architecture. In addition to this model, we will introduce a reinforcement learning agent that learns to sequentially explore MRI slices or regions and determine when and where to apply the segmentation model.
-
-Instead of learning to segment tumors from scratch, the reinforcement learning agent will treat the segmentation model as a fixed tool and focus on learning an efficient search strategy. The ultimate goal of this project is to investigate whether reinforcement learning can reduce the number of slices or regions that must be examined while maintaining high tumor detection accuracy.
 
 ## Project Goals
 
