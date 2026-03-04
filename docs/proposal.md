@@ -14,13 +14,13 @@ Instead of learning to segment tumors from scratch, the reinforcement learning a
 ## Project Goals
 
 - **Minimum:**  
-  Implement and train a baseline supervised learning model for brain metastasis segmentation using the labeled MRI scans. The model should successfully identify tumors at the same time that most professionals would, by producing segmentation masks.
+ Develop an agent that can play Tetris at the level of a beginner (anywhere from 10,000 to 50,000 points for complete beginners, and 70,000 to 100,000 points for decent/casual play). Scaled to the environment, this would be equal to a score of at least 10-50 points for complete beginners and 70-100 points for casual.
 
 - **Realistic:**  
-  Explore and design a reinforcement learning agent that can learn to detect brain tumors from MRI scans, operating alongside the baseline model. The resulting system should have a measurable improvement over just the baseline.
+ Develop an agent that is on par with a moderately skilled Tetris player; i.e. scores around 250-500 points in the given environment. The agent should also be able to reach this score faster and display reasonably quick decision-making skills. 
 
 - **Moonshot:**  
-  Develop a reinforcement learning agent that can detect tumors as early as possible, either before formation or at the earliest stages; be able to detect tumors with a limited amount of data.
+  Develop an agent that can play Tetris like an expert, and develop strategies that appear in human play. The agent would be able to max out the score in the environment (9,999 for the ALE environment, for instance) as quickly as possible and in as few learning steps as possible.
 
 ## AI/ML Algorithms Used
 
