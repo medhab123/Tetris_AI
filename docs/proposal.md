@@ -40,10 +40,10 @@ For qualitative analysis, we will use toy examples such as a white circle on a b
 
 ## Additional AI Tool Usage
 
-ChatGPT was used during the project to help with brainstorming model designs and understanding difficult concepts such as reinforcement learning.
+ChatGPT was used during the project to help with brainstorming, writing, and understanding the basics of difficult concepts.
 
 ## Additional Credits
 
-**Stanford BrainMetShare:**
-
-This research used data provided by the Stanford Center for Artificial Intelligence in Medicine and Imaging (AIMI). AIMI curated a publicly available imaging data repository containing clinical imaging and data from Stanford Health Care, the Stanford Children's Hospital, the University Healthcare Alliance, and Packard Children's Health Alliance clinics, provisioned for research use by the Stanford Medicine Research Data Repository (STARR).
+[ALE](https://github.com/Farama-Foundation/Arcade-Learning-Environment):
+M. G. Bellemare, Y. Naddaf, J. Veness and M. Bowling. The Arcade Learning Environment: An Evaluation Platform for General Agents, Journal of Artificial Intelligence Research, Volume 47, pages 253-279, 2013.
+M. C. Machado, M. G. Bellemare, E. Talvitie, J. Veness, M. J. Hausknecht, M. Bowling. Revisiting the Arcade Learning Environment: Evaluation Protocols and Open Problems for General Agents, Journal of Artificial Intelligence Research, Volume 61, pages 523-562, 2018
