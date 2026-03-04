@@ -24,9 +24,9 @@ Instead of learning to segment tumors from scratch, the reinforcement learning a
 
 ## AI/ML Algorithms Used
 
-U-net convolutional neural network (CNN) (TensorFlow)
+ALE Environment: CNN with PPO algorithm
 
-Reinforcement learning model from PyTorch
+PyGame Environment: DQN, ReLu activation functions, RBED policy
 
 ## Evaluation Plan
 
