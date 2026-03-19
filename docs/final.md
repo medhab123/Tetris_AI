@@ -94,17 +94,136 @@ The feature vector consists of seven key components that capture both short and 
 
 To examine whether reinforcement learning can capture different Tetris playing styles, we design multiple reward functions corresponding to distinct strategic objectives. These reward functions not only guide the agents behavior but also serve as a way to evaluate how well structured strategies can emerge from learning.
 
-1. Survivor Mode with 7 features (linear_survivor_3)
+#### 1. Survivor Mode with 7 features (linear_survivor_3)
+
 The survivor mode agent is designed to prioritize long-term survival over score maximization. The reward function heavily penalizes board height and the number of holes, encouraging the agent to maintain a clean and low board.
 
 $` R = 10*L *(Level + 1) + 0.5 - (10* H1.5+25*Holes+ 10 * blockades+5*B+ 2*RT+2*CT) `$
 
 | Variable | Feature |
 | -------- | ------- |
-|
+| L | Lines cleared |
+| level | Number of lines cleared/10 |
+| H | Max height |
+| Holes | Number of holes |
+| B | Bumpiness |
+| Blockades | Blockades |
+| RT | Row transitions |
+| CT | Column transitions |
+| Rbase | Base survival reward |
 
+(insert image)
 
+#### 2. Survivor Mode with 6 features (linear_survivor_3k)
+
+This reward function is similar to the Survivor Mode with 7 features, but uses a reduced 6-feature representation by excluding the blockade feature.
+
+Line clearing:
+- If 4 lines are cleared: Reward = 1000 * (n+1)
+- If 1 to 3 lines are cleared: Reward = 15 * (l^2) * (n+1)
+- If no line is cleared: Reward = 1.0
+  
+Board quality penalties:
+- reward -= 12 * holes
+- reward -= 2.5 * b
+- reward -= 1.0 * rt
+- reward -= 1.0 * ct
+- reward -= 0.5 * h
+- Death penalty: -200
+
+(insert image 2)
+
+#### 3. Survivor Mode with 4 features (linear_survivor_4feature)
+
+This reward function is a simplified version of Survivor Mode, using only 4 features instead of the larger feature set. Compared to the previous variants, this version removes row transitions (RT) and column transitions (CT), leaving only the most essential features for survival-oriented play.
+
+Line clearing:
+- If 4 lines are cleared: Reward = 1000 * (n+1)
+- If 1 to 3 lines are cleared: Reward = 15 * (l^2) * (n+1)
+- If no line is cleared: Reward = 1.0
+
+Board quality penalties:
+- reward -= 12 * holes
+- reward -= 2.5 * b
+- reward -= 0.5 * h
+- Death penalty: -200
+
+(insert image 3)
+
+#### 4. 9-0 Single Well Strategy (linear_maxline_2)
+
+To explore whether the agent can learn human-like high scoring strategy, we design a reward function based on the classic 9-0 stacking approach. In this setup, the agent fills the 9 columns and intentionally leaves a single column on the other side to  perform Tetris clears using the I-piece.
+
+The reward function assigns a huge reward for clearing four lines, while giving minimal or even negative reward for clearing fewer lines. This forces the agent to prioritize stacking.
+
+$` R = line cleared reward - 0.2*H  -30 * Holes -10*B- 1.5 * RT - 1.5 * CT `$
+
+Line cleared reward: 
+- If 4 lines are cleared: 4000 * (level+1)
+- If 1 to 3 lines are cleared: -20 *l
+- If no lines are cleared: 2.0
+  
+In many cases, the agent becomes overly committed to maintaining the 9-0 structure and avoids clearing lines even when the board becomes dangerously high. As a result, despite having well structured stacks, the agent frequently tops out due to the absence of timely line clears. This demonstrates that a strict reward design can lead to pathological behavior, where the agent optimizes for structure but fails to balance survival and scoring.
+
+(insert image 4)
+
+#### 5. 8-0 Double Well Strategy (linear_double_well_3k)
+
+The limitations of the 9-1 strategy motivated the design of an 8-0 Double Well approach. This strategy addresses two key issues observed in the 9-0 setting. First, the agent tends to avoid clearing lines; therefore, we increase the reward for clearing 1 and 2 lines while still assigning a high reward for clearing 4 lines. Second, the 9-0 strategy relies heavily on I-pieces for line clearing, which makes the agent vulnerable to piece droughts. By adopting an 8-0 structure, the agent can utilize more types of pieces to clear lines, improving robustness and survivability.
+
+Line clearing:
+- If 4 lines clearing reward: Reward = 4000 *(n+1)
+- If 2 or 3 lines are cleared: Reward = 500 * l * (n+1)
+- If 1 line is cleared: Reward = -10
+- If no line is cleared: Reward = 1
+
+Well structure:
+
+Let max_left_h be the maximum height of the left 8 columns.
+
+Let max_well_h be the maximum height of the right 2 column well.
+
+Then:
+- If max_left_h > max_well_h + 3: Reward += 30
+- If max_well_h > max_well_h: Reward -= 50
+
+Board quality penalties:
+- Reward -= 40 * holes
+- Reward -= 15 * b
+- Reward -= 6 * rt
+- Reward -= 6 * ct
+  
+Height penalty:
+- If max_left_h > 10: Reward -= 0.6*(max_left_h^0.2)
+- Otherwise: Reward -= 0.1 * max_left_h
+
+(insert image)
+
+### Epsilon- greedy strategy
+
+We adopt an epsilon-greedy strategy to balance exploration and exploitation during training. Initially, the exploration rate ε is set to 1.0, allowing the agent to explore the action space randomly. As training progresses, ε gradually decays to a predefined minimum value (EPSILON_MIN). After reaching this threshold, ε remains constant for the rest of the training.
+
+We investigate two key factors in the epsilon scheduling: the decay threshold and the minimum exploration rate. Empirically, we observe that the choice of decay threshold has minimal impact on the final performance of the model. In contrast, the value of EPSILON_MIN more affects the learning result.
+
+To study this effect, we experiment with multiple EPSILON_MIN values under a linear decay schedule, including 0.1 0.05 and 0.005. Our results show that a smaller minimum exploration rate (ε  = 0.005) leads to better performance compared to higher values. This suggests that excessive exploration in later training stages may hinder the agent from converging to a stable and effective policy.
+
+Based on this observation, we fix EPSILON_MIN at 0.005 and further evaluate different decay strategies. Specifically, we compare linear decay with exponential decay. The experimental results indicate that exponential decay yields better performance than linear decay. Likely due to its ability to reduce exploration mode aggressively in earlier stages while still allowing sufficient exploration at the beginning of training.
+
+(insert image)
+
+(insert image)
 
 ## Evaluation
+
+### Agent 1: CNN + PPO (ALE Environment)
+
+The agent trained in the ALE environment with a PPO policy fails to meet even our lowest standard, as it can only clear 4-5 lines on average (around 4 x 100 = 400 points, to scale it as close as possible to standard Tetris scoring). Despite multiple attempts at hyperparameter tuning with the StableBaselines 3 PPO implementation, the agent struggles to play Tetris. At best, this agent has gotten better at filling in the board evenly and minimizing holes, as well as being able to last longer in doing so.
+
+In general, PPO is not ideal for games such as Tetris. PPO works by creating an initial probability distribution where actions that have a better chance of being good are given a higher probability. Then, throughout the episodes, the probabilities of each action are adjusted based on the result. The issue with this is that no single action in Tetris is consistently “good” or “bad”; a move’s value depends entirely on the current state of the board. In fact, a move’s value might not be apparent until more moves are made; a seemingly harmless block placement could lead to an unwinnable board state later on. This problem was only further exacerbated by the action space of the ALE environment (left, right, down, rotate, and do nothing). These actions cannot be deemed better or worse than another, since a strategy like “moving all pieces to the left regardless of shape” will never find success. 
+
+Thus, no amount of hyperparameter tuning was able to bring the PPO agent to the same level as our DQN agent. The limitations of the action space and environment overall would essentially require a full remake in order to make PPO work well on Tetris.
+
+### Agent 2: DQN (PyGames custom Environment)
+
 
 ## Resources Used
