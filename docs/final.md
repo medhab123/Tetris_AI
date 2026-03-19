@@ -37,7 +37,7 @@ Thus, we added some environment preprocessing, such as environment wrappers and 
 
 (insert defaults vs enhanced)
 
-The vectorized environment included normalization and xxx. AtariWrapper was chosen to make the environment easier to manage for the agent, and adds. VecFrameWrapper was used to give the agent a sense of time (the agent takes in the last n images as a stack, rather than viewing each frame individually). With environment preprocessing, the agent performs much better and consistently higher than the agent without any. Thus, we used the enhanced environment to test hyperparameters on.
+The vectorized environment included normalization, and runs multiple copies of the environment simultaneously to speed up training time. AtariWrapper was chosen to make the environment easier to manage for the agent, and adds. VecFrameWrapper was used to give the agent a sense of time (the agent takes in the last n images as a stack, rather than viewing each frame individually). With environment preprocessing, the agent performs much better and consistently higher than the agent without any. Thus, we used the enhanced environment to test hyperparameters on.
 
 The hyperparameters we tested on the PPO included the following:
 gamma (γ) (default = 0.99) - the variable that determines whether long-term or short-term rewards are prioritized. higher gamma prioritizes long-term rewards
@@ -64,6 +64,46 @@ Increasing the entropy coefficient saw the most improvement in terms of mean rew
 
 
 ### Agent 2: DQN (PyGame + ALE Environments)
+
+The second agent was mainly developed and tested in a custom Tetris environment we built from scratch using PyGame, following the OpenAI Gym interface. We also ran it in the ALE environment to compare directly with the PyGames version. Similar to ALE, our custom environment doesn't show the next piece and keeps game speed constant, however unlike ALE it uses the standard Tetris scoring rules (including things like level and combo bonuses).
+One of the bigger design decisions for DQN was how to define the action space and state. Instead of raw pixels, each action represents a specific rotation and landing column for the current piece — basically, the agent considers every possible placement and picks whichever one has the highest predicted Q-value. Rather than feeding in pixels, we give the network four hand-crafted features describing the board after each placement.
+These go into a small network with two fully connected hidden layers (64 units each, ReLU activations) that outputs a single Q-value for the placement. We used Double DQN, meaning we have a policy network that is updated at every step and a target network with frozen weights that provides more stable Q-value targets for computing the loss.
+
+Key hyperparameters:
+Batch Size: 128 - Number of samples per training update.
+Learning Rate (LR): 0.0003 - Step size for updating network weights using Adam optimizer.
+Discount Factor (γ): 0.99 - Controls the importance of future rewards.
+Replay Buffer Size: 50,000 -Maximum number of stored transitions for experience replay.
+Target Update Interval 500: Frequency of updating the target network.
+Loss Function: MSE
+	
+### Feature
+
+The feature vector consists of seven key components that capture both short and long term outcomes board stability. Specifically, the features include the maximum height (H), the number of lines cleared (L), the number of holes, bumpiness (B), the number of blockades (Blk), and the row and column transitions (RT and CT). Not all features are used in every model variant. However, three core features - height, holes, and line clearance are consistently included across all models, as they represent the most fundamental aspects of gameplay. The remaining features, such as bumpiness, blockages, and transitions, are selectively incorporated depending on the objective of each strategy. For instance, strategies that emphasize stability rely more on smoothness related features, while aggressive strategies may focus more on line clearing reward.
+
+| Feature (symbol) | Description | Strategic Significance |
+| ---------------- | ----------- | ---------------------- |
+| Height | Aggregate height of the board | Higher stacks reduce the margin for error and increase the risk of top-out |
+| Lines | Number of lines cleared by the current action | Primary source of positive reward and progress |
+| Holes | Number of empty cells covered by blocks above | One of the most critical failure factors |
+| Bumpiness | Sum of height differences between adjacent columns | Measures surface roughness; lower values indicate a flatter and more controllable board |
+| Blockades | Number of blocks stacked above holes | Indicates how difficult it is to recover buried holes |
+| Transitions (RT / CT) | Number of filled-empty transitions across rows and columns | Captures structural irregularity and board complexity |
+
+### Reward Function
+
+To examine whether reinforcement learning can capture different Tetris playing styles, we design multiple reward functions corresponding to distinct strategic objectives. These reward functions not only guide the agents behavior but also serve as a way to evaluate how well structured strategies can emerge from learning.
+
+1. Survivor Mode with 7 features (linear_survivor_3)
+The survivor mode agent is designed to prioritize long-term survival over score maximization. The reward function heavily penalizes board height and the number of holes, encouraging the agent to maintain a clean and low board.
+
+$` R = 10*L *(Level + 1) + 0.5 - (10* H1.5+25*Holes+ 10 * blockades+5*B+ 2*RT+2*CT) `$
+
+| Variable | Feature |
+| -------- | ------- |
+|
+
+
 
 ## Evaluation
 
