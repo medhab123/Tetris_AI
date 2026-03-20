@@ -30,12 +30,13 @@ The first agent used the ALE/Tetris-v5 environment from Gymnasium, which runs th
 We used Stable Baselines3's PPO with a CNN policy. PPO is an on-policy method that clips policy updates so that training doesn't go off the rails from a single bad batch. One downside in Tetris specifically is that PPO learns a probability distribution over actions, so it doesn't account for context; the same action might be great in one board state and terrible in another. We trained for about 1 million timesteps on the HPC cluster and logged everything to TensorBoard. We ran a bunch of experiments swapping out different wrappers, normalization settings, and training lengths, always comparing back to our original baseline.
 
 Hyperparameters (mostly Stable Baselines3 defaults):
-•      Learning rate: 3 × 10⁻⁴
-•      n_steps: 2048
-•      Batch size: 64
-•      Discount factor γ: 0.99
-•      Clip range ε: 0.2
-•      Total training: ~1 million timesteps
+
+- Learning rate: 3 × 10⁻⁴
+- n_steps: 2048
+- Batch size: 64
+- Discount factor γ: 0.99
+- Clip range ε: 0.2
+- Total training: ~1 million timesteps
 
 First, we recorded the agent’s performance with all default settings and no optimization, pictured below.
 
