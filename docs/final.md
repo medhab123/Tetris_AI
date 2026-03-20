@@ -274,6 +274,7 @@ PPO testing:
 - [PPO hyperparameter definitions and ideal ranges](https://medium.com/aureliantactics/ppo-hyperparameters-and-ranges-6fc2d29bccbe)
 - [Study on working with PPO in ALE environment](https://www.sciencedirect.com/science/article/pii/S0957417425008735?__cf_chl_rt_tk=Eb7porf.iATARhLEJhKc.zpbIvcFcoMfjrjv1kpuwtg-1773628584-1.0.1.1-eRQiAT8nn9M43FBHbJb7nCUsgl7s79FmtObpmSd2AJ4)
 - [Basics of PPO algorithm](https://en.wikipedia.org/wiki/Proximal_policy_optimization)
+- [StableBaselines 3 PPO notes](https://spinningup.openai.com/en/latest/algorithms/ppo.html#exploration-vs-exploitation)
 
 DQN testing:
 - [Reward Based Epsilon Decay](https://aakash94.github.io/Reward-Based-Epsilon-Decay/):
