@@ -237,9 +237,9 @@ To study this effect, we experiment with multiple EPSILON_MIN values under a lin
 
 Based on this observation, we fix EPSILON_MIN at 0.005 and further evaluate different decay strategies. Specifically, we compare linear decay with exponential decay. The experimental results indicate that exponential decay yields better performance than linear decay. Likely due to its ability to reduce exploration mode aggressively in earlier stages while still allowing sufficient exploration at the beginning of training.
 
-(insert image)
+<img src="img/DQN/Epsolon-greedy.png">
 
-(insert image)
+<img src="img/DQN/Epsolon-greedy_all.png">
 
 ## Evaluation
 
