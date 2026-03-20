@@ -122,7 +122,7 @@ The feature vector consists of seven key components that capture both short and 
 
 To examine whether reinforcement learning can capture different Tetris playing styles, we design multiple reward functions corresponding to distinct strategic objectives. These reward functions not only guide the agents behavior but also serve as a way to evaluate how well structured strategies can emerge from learning.
 
-#### 1. Survivor Mode with 7 features (linear_survivor_3)
+#### 1. Survivor Mode with 7 features
 
 The survivor mode agent is designed to prioritize long-term survival over score maximization. The reward function heavily penalizes board height and the number of holes, encouraging the agent to maintain a clean and low board.
 
@@ -142,7 +142,7 @@ $` R = 10*L *(Level + 1) + 0.5 - (10* H1.5+25*Holes+ 10 * blockades+5*B+ 2*RT+2*
 
 <img src="img/DQN/linear_survivor_3.png">
 
-#### 2. Survivor Mode with 6 features (linear_survivor_3k)
+#### 2. Survivor Mode with 6 features
 
 This reward function is similar to the Survivor Mode with 7 features, but uses a reduced 6-feature representation by excluding the blockade feature.
 
@@ -159,9 +159,9 @@ Board quality penalties:
 - reward -= 0.5 * h
 - Death penalty: -200
 
-(insert image 2)
+<img src="img/DQN/linear_survivor_3k.png">
 
-#### 3. Survivor Mode with 4 features (linear_survivor_4feature)
+#### 3. Survivor Mode with 4 features
 
 This reward function is a simplified version of Survivor Mode, using only 4 features instead of the larger feature set. Compared to the previous variants, this version removes row transitions (RT) and column transitions (CT), leaving only the most essential features for survival-oriented play.
 
@@ -176,9 +176,9 @@ Board quality penalties:
 - reward -= 0.5 * h
 - Death penalty: -200
 
-(insert image 3)
+<img src="img/DQN/linear_survivor_4feature.png">
 
-#### 4. 9-0 Single Well Strategy (linear_maxline_2)
+#### 4. 9-0 Single Well Strategy 
 
 To explore whether the agent can learn human-like high scoring strategy, we design a reward function based on the classic 9-0 stacking approach. In this setup, the agent fills the 9 columns and intentionally leaves a single column on the other side to  perform Tetris clears using the I-piece.
 
@@ -193,9 +193,9 @@ Line cleared reward:
   
 In many cases, the agent becomes overly committed to maintaining the 9-0 structure and avoids clearing lines even when the board becomes dangerously high. As a result, despite having well structured stacks, the agent frequently tops out due to the absence of timely line clears. This demonstrates that a strict reward design can lead to pathological behavior, where the agent optimizes for structure but fails to balance survival and scoring.
 
-(insert image 4)
+<img src="img/DQN/linear_maxline_2.png">
 
-#### 5. 8-0 Double Well Strategy (linear_double_well_3k)
+#### 5. 8-0 Double Well Strategy 
 
 The limitations of the 9-1 strategy motivated the design of an 8-0 Double Well approach. This strategy addresses two key issues observed in the 9-0 setting. First, the agent tends to avoid clearing lines; therefore, we increase the reward for clearing 1 and 2 lines while still assigning a high reward for clearing 4 lines. Second, the 9-0 strategy relies heavily on I-pieces for line clearing, which makes the agent vulnerable to piece droughts. By adopting an 8-0 structure, the agent can utilize more types of pieces to clear lines, improving robustness and survivability.
 
@@ -225,7 +225,7 @@ Height penalty:
 - If max_left_h > 10: Reward -= 0.6*(max_left_h^0.2)
 - Otherwise: Reward -= 0.1 * max_left_h
 
-(insert image)
+<img src="img/DQN/linear_double_well_3k.png">
 
 ### Epsilon- greedy strategy
 
