@@ -63,10 +63,12 @@ GAMMA:
 
 | gamma value | color |
 | ----------- | ----- |
-| 0.99 (default) | pink |
+| 0.99 (default)| pink |
 | 0.80 | purple |
 | 0.90 | cyan |
 | 0.95 | red |
+
+Changes to gamma had very little effect on the mean reward. While episode length became more consistent, it did not necessarily increase. Since the gamma value affects whether long-term or short-term rewards were prioritized, and Tetris prefers prioritizing a long-term reward (building up a good board state to clear more lines in single moves), the high default gamma value of 0.99 was already ideal for the agent.
 
 CLIP RANGE:
 
