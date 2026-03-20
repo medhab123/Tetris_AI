@@ -255,9 +255,17 @@ The agent trained in the ALE environment with a PPO policy fails to meet even ou
 
 In general, PPO is not ideal for games such as Tetris. PPO works by creating an initial probability distribution where actions that have a better chance of being good are given a higher probability. Then, throughout the episodes, the probabilities of each action are adjusted based on the result. The issue with this is that no single action in Tetris is consistently “good” or “bad”; a move’s value depends entirely on the current state of the board. In fact, a move’s value might not be apparent until more moves are made; a seemingly harmless block placement could lead to an unwinnable board state later on. This problem was only further exacerbated by the action space of the ALE environment (left, right, down, rotate, and do nothing). These actions cannot be deemed better or worse than another, since a strategy like “moving all pieces to the left regardless of shape” will never find success. 
 
-Thus, no amount of hyperparameter tuning was able to bring the PPO agent to the same level as our DQN agent. The limitations of the action space and environment overall would essentially require a full remake in order to make PPO work well on Tetris.
+Thus, no amount of hyperparameter tuning was able to bring the PPO agent to the same level as our DQN agent. The limitations of the action space and environment overall would essentially require a full remake in order to make PPO work even decently on Tetris.
 
 ### Agent 2: DQN (PyGames custom Environment)
+
+The agent trained in the custom PyGame environment is able to clear 783 lines with 581,000 points in 2700 episodes, and thus reaches our score requirements for intermediate level Tetris gameplay.
+
+The DQN combined with a customized environment and additional features to the reward function allowed this agent to succeed. DQN works by creating a Q-table consisting of state-action pairings, which the agent can then modify and reference in future gameplay. Our Tetris agent was thus able to learn certain good block configurations and had a much easier time adapting to each new board state. 
+
+The custom environment also significantly improved the agent’s performance. Our agent’s action space consisted of all possible configurations of each piece, rather than being limited to the literal controller moves of classic Tetris. This allowed the algorithm to assign and update values based on piece configuration, which is ideal for optimal Tetris play. Better configurations, such as those with minimal holes (gaps that would prevent a line clear), make it easier for the agent to score points and survive longer. 
+
+Similar adjustments to the reward function also reflected this; the agent was rewarded for copying human-like strategies (such as 9-0 stacking). We encouraged the agent to build these structures in its gameplay, in addition to reinforcing general good board management by penalizing holes. 
 
 
 ## Resources Used
