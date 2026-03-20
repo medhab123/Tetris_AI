@@ -140,7 +140,7 @@ $` R = 10*L *(Level + 1) + 0.5 - (10* H1.5+25*Holes+ 10 * blockades+5*B+ 2*RT+2*
 | CT | Column transitions |
 | Rbase | Base survival reward |
 
-(insert image)
+<img src="img/DQN/linear_survivor_3.png">
 
 #### 2. Survivor Mode with 6 features (linear_survivor_3k)
 
