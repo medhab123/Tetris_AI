@@ -5,7 +5,7 @@ title: Final Report
 
 ### Video
 
-(link)
+[Tetris RL](https://drive.google.com/file/d/1wHmnsDZ_dEFYRI8pynPbx_Q1t7wDPbXM/view?usp=sharing) (video was too large to embed)
 
 ### Repository Links
 
