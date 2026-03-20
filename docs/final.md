@@ -29,13 +29,13 @@ Hyperparameters (mostly Stable Baselines3 defaults):
 
 First, we recorded the agent’s performance with all default settings and no optimization, pictured below.
 
-(insert defaults)
+<img src="img/PPO graphs/PPO all defaults.png">
 
 As expected, the agent performs incredibly poorly. The agent is unable to score any points, and at best can survive for a small period of time without dying. There was also significant fluctuation throughout the training period.
 
 Thus, we added some environment preprocessing, such as environment wrappers and normalization. The following graphs show the performance of the agent with a vector environment, AtariWrapper, and VecFrameWrapper:
 
-(insert defaults vs enhanced)
+<img src="img/PPO graphs/PPO defaults vs enhanced.png">
 
 The vectorized environment included normalization, and runs multiple copies of the environment simultaneously to speed up training time. AtariWrapper was chosen to make the environment easier to manage for the agent, and adds. VecFrameWrapper was used to give the agent a sense of time (the agent takes in the last n images as a stack, rather than viewing each frame individually). With environment preprocessing, the agent performs much better and consistently higher than the agent without any. Thus, we used the enhanced environment to test hyperparameters on.
 
@@ -48,17 +48,41 @@ Of these, adjusting the entropy coefficient to 0.005 produced the most significa
 
 GAMMA:
 
-(insert gamma images)
+<img src="img/PPO graphs/PPO gamma (ep length).png">
+<img src="img/PPO graphs/PPO gamma (mean reward).png">
+
+| gamma value | color |
+| ----------- | ----- |
+| 0.99 (default) | pink |
+| 0.80 | purple |
+| 0.90 | cyan |
+| 0.95 | red |
 
 CLIP RANGE:
 
-(insert clip range images)
+<img src="img/PPO graphs/PPO cliprange (ep length).png">
+<img src="img/PPO graphs/PPO cliprange (mean reward).png">
+
+| clip range | color |
+| ---------- | ----- |
+| 0.2 (default) | pink |
+| 0.1 | green |
+| 0.3 | yellow |
+| 0.5 | blue |
 
 Increasing the clip range slightly to 0.3 did the best at increasing average episode length and saw higher average peaks in terms of mean reward. Having too low of a clip range made it harder for the agent to explore new actions and update the policy in a significant manner, while having too high of a clip range resulted in much shorter episodes (faster game deaths) and very little reward gained.
 
 ENTROPY COEFFICIENT:
 
-(insert entropy images)
+<img src="img/PPO graphs/PPO entropy (ep length).png">
+<img src="img/PPO graphs/PPO entropy (mean reward).png">
+
+| entropy coefficient | color |
+| ------------------- | ----- |
+| 0.0 (default) | pink |
+| 0.005 | purple |
+| 0.01 | cyan |
+| 0.025 | navy |
 
 Increasing the entropy coefficient saw the most improvement in terms of mean reward, but this spike was only reached at the 1 million timestep mark. Beyond this, the drawbacks of increasing the timesteps further outweigh the possible minimal benefits of this entropy coefficient change.
 
@@ -227,3 +251,43 @@ Thus, no amount of hyperparameter tuning was able to bring the PPO agent to the 
 
 
 ## Resources Used
+
+Code resources:
+- [ALE environment](https://ale.farama.org/environments/tetris/) to simulate Tetris
+- Gymnasium documentation for [starters on agent training](https://gymnasium.farama.org/introduction/train_agent/)
+- Stable Baselines 3 for PPO implementation
+- [Deep Q-Learning Network approach](https://github.com/ChesterHuynh/tetrisAI)
+- [Deep Q-learning for playing tetris game](https://github.com/vietnh1009/Tetris-deep-Q-learning-pytorch)
+- [Tetris with a Deep Q Network](https://github.com/michiel-cox/Tetris-DQN)
+
+Determining “expert play”/”playing like a human”:
+- [Tetris scoring](https://tetris.wiki/Scoring)
+- [Competitive Classic Tetris Rankings](https://docs.google.com/spreadsheets/d/1NUwqOotckIdSRH2FdfhBRHPU84N6EaRBM9BDkx5nDkU/edit?gid=1685146231#gid=1685146231)
+- [Common Tetris strategies](https://www.tetriseffect.game/2021/05/28/tetris-effect-community-guide/) (while they are for a slightly different version of Tetris, the core mechanics are essentially the same)
+
+PPO testing:
+- [PPO documentation from StableBaselines 3](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html)
+- [PPO hyperparameter definitions and ideal ranges](https://medium.com/aureliantactics/ppo-hyperparameters-and-ranges-6fc2d29bccbe)
+- [Study on working with PPO in ALE environment](https://www.sciencedirect.com/science/article/pii/S0957417425008735?__cf_chl_rt_tk=Eb7porf.iATARhLEJhKc.zpbIvcFcoMfjrjv1kpuwtg-1773628584-1.0.1.1-eRQiAT8nn9M43FBHbJb7nCUsgl7s79FmtObpmSd2AJ4)
+- [Basics of PPO algorithm](https://en.wikipedia.org/wiki/Proximal_policy_optimization)
+
+DQN testing:
+- [Reward Based Epsilon Decay](https://aakash94.github.io/Reward-Based-Epsilon-Decay/):
+Reward-Based Epsilon Decay (RBED) is an exploration strategy in reinforcement learning that adjusts the ε value in ε-greedy policies based on the agent’s performance rather than time or episode count. Instead of gradually decreasing ε on a fixed schedule, RBED lowers ε only when the agent reaches a predefined reward threshold, then raises the threshold for the next stage. This creates a performance-driven transition from exploration to exploitation, ensuring that the agent reduces exploration only after demonstrating learning progress. As a result, the approach can produce more stable training, better reproducibility, and more intuitive hyperparameter tuning, although its effectiveness depends on the quality and consistency of reward signals in a given environment.
+- [Introducing Q Learning](https://huggingface.co/learn/deep-rl-course/en/unit2/q-learning)
+- [Batch Size for DQN](https://ai.stackexchange.com/questions/23254/is-there-a-logical-method-of-deducing-an-optimal-batch-size-when-training-a-deep)
+There is no universal method to derive the optimal batch size for DQN. In practice, 32 or 64 are commonly used as default values, while larger batch sizes can be explored when aiming for the best performance. Ultimately, the optimal batch size is task-dependent and must be determined through experimentation.
+- [Hidden layer](https://www.heatonresearch.com/2017/06/01/hidden-layers.html)
+- [Gamma/ LR parameter settings reference](https://codesignal.com/learn/courses/q-learning-unleashed-building-intelligent-agents/lessons/introduction-to-q-learning-building-intelligent-agents)
+- [DQN Performance with Epsilon Greedy Policies and Prioritized Experience Replay](https://arxiv.org/html/2511.03670v1)
+
+AI tools such as ChatGPT were used to support understanding of research papers, clarify key concepts, and help with implementation issues such as environment setup and debugging. 
+
+Citations:
+
+[ALE](https://github.com/Farama-Foundation/Arcade-Learning-Environment):
+
+M. G. Bellemare, Y. Naddaf, J. Veness and M. Bowling. The Arcade Learning Environment: An Evaluation Platform for General Agents, Journal of Artificial Intelligence Research, Volume 47, pages 253-279, 2013.
+
+M. C. Machado, M. G. Bellemare, E. Talvitie, J. Veness, M. J. Hausknecht, M. Bowling. Revisiting the Arcade Learning Environment: Evaluation Protocols and Open Problems for General Agents, Journal of Artificial Intelligence Research, Volume 61, pages 523-562, 2018
+
